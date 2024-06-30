@@ -30,10 +30,6 @@ describe("crypto-task-capstone", () => {
 
   const escrow = anchor.web3.PublicKey.findProgramAddressSync([Buffer.from("escrow"), maker.publicKey.toBytes(), seed.toArrayLike(Buffer, "le", 8)], program.programId)[0];
   const vault = anchor.web3.PublicKey.findProgramAddressSync([Buffer.from("escrow_vault"), escrow.toBytes()], program.programId)[0];
-
-
-  console.log(escrow.toBase58());
-  console.log(vault.toBase58());
   
   it("Aidrop Sol to maker", async () => {
     const tx = await provider.connection.requestAirdrop(maker.publicKey, 2000000000);
@@ -55,6 +51,8 @@ describe("crypto-task-capstone", () => {
     // Capture the initial balance of the maker and the escrow vault
     const initialMakerBalance = await provider.connection.getBalance(maker.publicKey);
     const initialVaultBalance = await provider.connection.getBalance(vault);
+    console.log("Initial maker balance: ", initialMakerBalance);
+    console.log("Initial vault balance: ", initialVaultBalance);
   
     // Perform the deposit transaction
     const tx = await program.methods.deposit(amount).accountsPartial({
@@ -71,10 +69,9 @@ describe("crypto-task-capstone", () => {
     const finalVaultBalance = await provider.connection.getBalance(vault);
   
     // Output the balances for debugging
-    console.log("Initial maker balance: ", initialMakerBalance);
-    console.log("Final maker balance: ", finalMakerBalance);
-    console.log("Initial vault balance: ", initialVaultBalance);
+
     console.log("Final vault balance: ", finalVaultBalance);
+    console.log("Final maker balance: ", finalMakerBalance);
   });
 
   it("Makes a withdraw!", async () => {
