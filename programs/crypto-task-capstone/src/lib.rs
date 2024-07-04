@@ -9,12 +9,11 @@ mod contexts;
 use contexts::*;
 
 #[program]
-pub mod vault {
+pub mod crypto_task_capstone {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>, seed: u64, hash: [u8; 32], amount: u64) -> Result<()> {
+    pub fn initialize(ctx: Context<Initialize>,  seed: u64, hash: [u8; 32], amount: u64) -> Result<()> {
         ctx.accounts.init(seed, hash, amount, &ctx.bumps)?;
-
         Ok(())
     }
 

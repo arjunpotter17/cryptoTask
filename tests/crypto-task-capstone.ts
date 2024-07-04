@@ -1,6 +1,6 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
-import { Vault } from "../target/types/vault";
+import { CryptoTaskCapstone } from "../target/types/crypto_task_capstone";
 import crypto from "crypto";
 
 describe("crypto-task-capstone", () => {
@@ -8,7 +8,7 @@ describe("crypto-task-capstone", () => {
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
-  const program = anchor.workspace.CryptoTaskCapstone as Program<Vault>;
+  const program = anchor.workspace.CryptoTaskCapstone as Program<CryptoTaskCapstone>;
 
   const seed = new anchor.BN(123);
   const amount = new anchor.BN(2_000_000_0);
